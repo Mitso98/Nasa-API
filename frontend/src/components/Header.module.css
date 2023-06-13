@@ -1,0 +1,13 @@
+.header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+}
+.link {
+  margin-left: 1rem;
+  text-decoration: none;
+  color: #007bff;
+}
+.link:hover {
+  text-decoration: underline;
+}

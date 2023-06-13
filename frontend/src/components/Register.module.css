@@ -1,0 +1,24 @@
+/* Register.module.css */
+.container {
+    max-width: 600px;
+    margin: auto;
+    margin-top: 5%;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .submit-btn {
+    margin-top: 1rem;
+  }
