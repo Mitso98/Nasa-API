@@ -31,15 +31,8 @@ const Favorites = () => {
   return (
     <div>
       <h1>Favorites</h1>
-      <div>
-        <input
-          type="text"
-          value={newFavorite}
-          onChange={(e) => setNewFavorite(e.target.value)}
-          placeholder="Enter new favorite ID"
-        />
-      </div>
       <ul>
+        {!favorites.length && <p>No Data to be shown!</p>}
         {favorites.map((favorite) => (
           <li key={favorite._id}>
             {favorite.title}{" "}
