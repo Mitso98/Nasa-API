@@ -3,7 +3,6 @@ const User = require("../models/User");
 exports.getAllFavorites = async (req, res) => {
   try {
     const user = await User.findById(req.user.userId);
-    console.log(user);
     res.status(200).json({ favorites: user.favorites });
   } catch (error) {
     console.error("Error getting all favorites:", error);

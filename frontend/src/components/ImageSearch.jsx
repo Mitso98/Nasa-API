@@ -10,6 +10,8 @@ const ImageSearch = () => {
   const [previousPage, setPreviousPage] = useState(null);
   const [page, setPage] = useState(1);
   const { favorites, setFavorites } = useFavorites();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleAddFavorite = async (image) => {
     try {
@@ -33,16 +35,31 @@ const ImageSearch = () => {
     return favorites.some((favorite) => favorite._id === imageId);
   };
   const fetchImages = async (page) => {
+    setLoading(true);
+    setError(null);
+
     try {
       const response = await axios.get(
         `http://localhost:8000/api/nasa/search?q=${searchTerm}&page_size=2&page=${page}`
       );
-
-      setImages(response.data.data);
-      setNextPage(response.data.next);
-      setPreviousPage(response.data.previous);
+      if (!response.data.data) {
+        setError("No images found for the given search term");
+        setImages([]);
+      } else {
+        setImages(response.data.data);
+        setNextPage(response.data.next);
+        setPreviousPage(response.data.previous);
+        setLoading(false);
+      }
     } catch (error) {
       console.error("An error occurred while fetching images", error);
+      setLoading(false);
+
+      if (error.response && error.response.status === 404) {
+        setError("No images found for the given search term");
+      } else {
+        setError("An error occurred while fetching images");
+      }
     }
   };
 
@@ -78,8 +95,11 @@ const ImageSearch = () => {
           onChange={handleInputChange}
           placeholder="Search for images"
         />
-        <button type="submit">Search</button>
+        <button type="submit" disabled={loading}>
+          {loading ? "Searching..." : "Search"}
+        </button>
       </form>
+      {error && <p>{error}</p>}
       <div>
         {images.map((image) => (
           <div key={image._id}>
@@ -98,6 +118,7 @@ const ImageSearch = () => {
           </div>
         ))}
       </div>
+      {!images.length && <p>No Data for this query</p>}
       {previousPage && <button onClick={handlePreviousPage}>Previous</button>}
       {nextPage && <button onClick={handleNextPage}>Next</button>}
     </div>

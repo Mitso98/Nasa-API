@@ -17,12 +17,12 @@ const Favorites = () => {
     };
 
     getFavorites();
-  }, [refresh]); // Use refresh state as a dependency
+  }, [refresh]);
 
   const handleRemoveFavorite = async (favoriteId) => {
     try {
       await removeFavorite(favoriteId);
-      setRefresh(!refresh); // Toggle refresh state to trigger re-render
+      setRefresh(!refresh);
     } catch (error) {
       console.error("Error removing favorite:", error);
     }
