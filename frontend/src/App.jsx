@@ -8,31 +8,34 @@ import Header from "./components/Header";
 import ProtectedRoute from "./ProtectedRoute";
 import ImageSearch from "./components/ImageSearch";
 import { AuthContext } from "./AuthContext";
+import Favorites from "./components/Favorites";
+import { FavoriteProvider } from "./FavContext";
 
 function App() {
   const { user } = useContext(AuthContext);
 
   return (
-    <div className="App">
-      <Header />
-      <Routes>
-        <Route path="/register" element={<Register />} />
-        {!user && <Route path="/login" element={<Login />} />}
-        <Route path="/image" element={<ProtectedRoute />}>
-          <Route index element={<ImageSearch />} />
-        </Route>
-        <Route path="/home" element={<ProtectedRoute />}>
-          <Route index element={<HomePage />} />
-        </Route>
-        <Route path="/logout" element={<ProtectedRoute />}>
-          <Route index element={<Logout />} />
-        </Route>
-
-        {/* 
-        <Route path="/verify-email/:token" element={<VerifyEmail />} />
-        <Route path="/reset-password" element={<ResetPassword />} /> */}
-      </Routes>
-    </div>
+    <FavoriteProvider>
+      <div className="App">
+        <Header />
+        <Routes>
+          <Route path="/favorites" element={<ProtectedRoute />}>
+            <Route index element={<Favorites />} />
+          </Route>
+          <Route path="/register" element={<Register />} />
+          <Route path="/image" element={<ProtectedRoute />}>
+            <Route index element={<ImageSearch />} />
+          </Route>
+          {!user && <Route path="/login" element={<Login />} />}
+          <Route path="/home" element={<ProtectedRoute />}>
+            <Route index element={<HomePage />} />
+          </Route>
+          <Route path="/logout" element={<ProtectedRoute />}>
+            <Route index element={<Logout />} />
+          </Route>
+        </Routes>
+      </div>
+    </FavoriteProvider>
   );
 }
 

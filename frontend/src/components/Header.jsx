@@ -12,11 +12,14 @@ function Header() {
     <header className={styles.header}>
       {user ? (
         <>
-          <Link to="/logout" className={styles.link}>
-            Logout
+          <Link to="/favorites" className={styles.link}>
+            Favorites
           </Link>
           <Link to="/image" className={styles.link}>
             Images
+          </Link>
+          <Link to="/logout" className={styles.link}>
+            Logout
           </Link>
         </>
       ) : (

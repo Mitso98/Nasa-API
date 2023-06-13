@@ -5,7 +5,7 @@ const userRoutes = require("./routes/authRoutes");
 const connectDB = require("./config/db");
 const nasaRoute = require("./routes/nasaRoutes");
 const cookieParser = require("cookie-parser");
-
+const favRoutes = require("./routes/favRoutes");
 // Load environment variables
 dotenv.config();
 const { PORT } = process.env || 3001;
@@ -21,6 +21,7 @@ app.use(cookieParser());
 // Routes
 app.use("/api/users", userRoutes);
 app.use("/api/nasa", nasaRoute);
+app.use("/api/favorites", favRoutes);
 // Function to start the server after a successful database connection
 const startServer = () => {
   app.listen(PORT, () => {

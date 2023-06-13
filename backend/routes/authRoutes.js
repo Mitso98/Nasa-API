@@ -1,5 +1,4 @@
 const express = require("express");
-const router = express.Router();
 const dotenv = require("dotenv");
 const { check } = require("express-validator");
 const { emailVerificationLimiter } = require("../middlewares/rateLimiter");
@@ -17,6 +16,7 @@ const { getUserObj } = require("../controllers/auth/getUserObj");
 dotenv.config();
 const { SMTP_USER } = process.env;
 
+const router = express.Router();
 // validation rules
 const registerValidation = [
   check("name", "Please enter your name").notEmpty(),
