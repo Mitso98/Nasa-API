@@ -7,7 +7,6 @@ const saveImage = async (item) => {
   let image = await Request.findById(nasaId);
 
   if (!image) {
-    console.log("new Image created");
     image = new Request({
       _id: nasaId,
       title: imageData.title,

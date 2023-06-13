@@ -15,14 +15,18 @@ export const removeFavorite = async (favoriteId) => {
   });
 };
 
-export const fetchFavorites = async () => {
+export const fetchFavorites = async (currentPage = 1, pageSize = 2) => {
   try {
     const response = await axios.get(`${fav_url}/get`, {
+      params: { page: currentPage, pageSize },
       withCredentials: true,
     });
-    return response.data.favorites;
+
+    console.log(response);
+
+    return response.data;
   } catch (error) {
     console.error("Error fetching favorites:", error);
-    return [];
+    return null;
   }
 };
