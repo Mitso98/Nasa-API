@@ -11,7 +11,6 @@ function Logout() {
   useEffect(() => {
     const performLogout = async () => {
       await logout();
-      localStorage.removeItem("token");
       setUser(null);
       navigate("/");
     };

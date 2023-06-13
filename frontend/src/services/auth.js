@@ -16,9 +16,9 @@ export const register = async (user) => {
   return await axios.post(`${users_url}/register`, user);
 };
 
-export const logout = async (token) => {
+export const logout = async () => {
   return await axios.post(`${users_url}/logout`, null, {
-    headers: { Authorization: `Bearer ${token}` },
+    withCredentials: true,
   });
 };
 
