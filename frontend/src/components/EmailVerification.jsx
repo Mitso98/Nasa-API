@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./EmailVerification.css";
-import { getVerification, getRateLimitInfo } from "../api";
+import { getVerification, getRateLimitInfo } from "../services/auth";
 
 const EmailVerification = () => {
   const [email, setEmail] = useState("");

@@ -1,10 +1,8 @@
 const jwt = require("jsonwebtoken");
-const rateLimit = require("express-rate-limit");
 
 const { JWT_SECRET } = process.env;
 
 const authMiddleware = async (req, res, next) => {
-  // Get the token from the request header
   const token = req.cookies?.token;
 
   if (!token) {
@@ -12,10 +10,8 @@ const authMiddleware = async (req, res, next) => {
   }
 
   try {
-    // Verify the token
     const decoded = jwt.verify(token, JWT_SECRET);
 
-    // Set the user object in the request
     req.user = await User.findById(decoded.userId);
 
     if (!req.user) {

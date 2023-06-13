@@ -11,6 +11,8 @@ const { verifyEmail } = require("../controllers/auth/verifyEmail");
 const {
   sendEmailverfication,
 } = require("../controllers/auth/sendEmailverfication");
+const authenticateToken = require("../middlewares/authenticateToken");
+const { getUserObj } = require("../controllers/auth/getUserObj");
 
 dotenv.config();
 const { SMTP_USER } = process.env;
@@ -68,5 +70,6 @@ router.post(
 
 router.get("/verify-email/:token", verifyEmail);
 router.get("/rateLimitInfo/:email", userController.rateLimitInfo);
+router.get("/me", authenticateToken, getUserObj);
 
 module.exports = router;

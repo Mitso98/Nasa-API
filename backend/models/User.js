@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { RequestSchema } = require("./Request");
 
 const UserSchema = new mongoose.Schema({
   name: {
@@ -22,6 +23,7 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  favorites: [RequestSchema],
 });
 
 module.exports = mongoose.model("User", UserSchema);

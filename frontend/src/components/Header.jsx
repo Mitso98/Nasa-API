@@ -1,6 +1,7 @@
 // src/components/Header.js
 import { useContext } from "react";
 import { AuthContext } from "../AuthContext";
+
 import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
 
@@ -10,9 +11,14 @@ function Header() {
   return (
     <header className={styles.header}>
       {user ? (
-        <Link to="/logout" className={styles.link}>
-          Logout
-        </Link>
+        <>
+          <Link to="/logout" className={styles.link}>
+            Logout
+          </Link>
+          <Link to="/image" className={styles.link}>
+            Images
+          </Link>
+        </>
       ) : (
         <>
           <Link to="/login" className={styles.link}>

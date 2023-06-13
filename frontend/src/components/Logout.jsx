@@ -2,7 +2,7 @@
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
-import { logout } from "../api";
+import { logout } from "../services/auth";
 
 function Logout() {
   const { setUser } = useContext(AuthContext);
@@ -11,6 +11,7 @@ function Logout() {
   useEffect(() => {
     const performLogout = async () => {
       await logout();
+      localStorage.removeItem("token");
       setUser(null);
       navigate("/");
     };

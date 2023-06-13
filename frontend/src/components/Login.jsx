@@ -1,7 +1,7 @@
 // src/components/Login.js
 import { useState, useContext } from "react";
 import { AuthContext } from "../AuthContext";
-import { login } from "../api";
+import { login } from "../services/auth";
 import { useNavigate } from "react-router-dom";
 import { Container, Form, Button, Alert } from "react-bootstrap";
 import EmailVerification from "./EmailVerification";
