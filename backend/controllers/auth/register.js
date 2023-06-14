@@ -11,7 +11,6 @@ dotenv.config();
 const { PORT } = process.env;
 
 exports.register = async (req, res) => {
-  // Validate the request body
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -20,7 +19,6 @@ exports.register = async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
-    // Check if the user already exists
     let user = await User.findOne({ email });
     if (user) {
       return res.status(400).json({ msg: "User already exists" });

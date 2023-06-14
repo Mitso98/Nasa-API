@@ -12,19 +12,4 @@ const mailer = nodemailer.createTransport({
   },
 });
 
-// const info = {
-//   from: "mostafa.ahmed19293949@gmail.com",
-//   to: "momo.ah6751@gmail.com",
-//   subject: "test",
-//   text: "test",
-// };
-
-// transport.sendMail(info, (err) => {
-//   if (err) {
-//     console.log("There is an error: ", err);
-//   } else {
-//     console.log("Sent");
-//   }
-// });
-
 module.exports = mailer;
