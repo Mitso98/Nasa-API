@@ -21,9 +21,6 @@ export const fetchFavorites = async (currentPage = 1, pageSize = 2) => {
       params: { page: currentPage, pageSize },
       withCredentials: true,
     });
-
-    console.log(response);
-
     return response.data;
   } catch (error) {
     console.error("Error fetching favorites:", error);
