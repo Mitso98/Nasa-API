@@ -1,6 +1,6 @@
 const axios = require("axios");
 const { Request } = require("../models/Request");
-
+const redisClient = require("../config/redis");
 const saveImage = async (item) => {
   const imageData = item.data[0];
   const nasaId = imageData.nasa_id;
@@ -28,8 +28,16 @@ const saveImage = async (item) => {
 
 exports.fetchNasa = async (req, res) => {
   const { q, page_size = 2, page } = req.query;
+  const cacheKey = `fetchNasa:${q}:${page_size}:${page}`;
 
   try {
+    const cachedData = await redisClient.get(cacheKey);
+
+    if (cachedData) {
+      const parsedData = JSON.parse(cachedData);
+      return res.json(parsedData);
+    }
+
     const response = await axios.get("http://images-api.nasa.gov/search", {
       params: {
         q,
@@ -42,8 +50,8 @@ exports.fetchNasa = async (req, res) => {
 
     const newImages = items.map(saveImage);
 
-    Promise.all(newImages).then((savedImages) =>
-      res.json({
+    Promise.all(newImages).then((savedImages) => {
+      const responseData = {
         data: savedImages,
         next: `/api/fetch?page=${
           parseInt(page) + 1
@@ -54,8 +62,12 @@ exports.fetchNasa = async (req, res) => {
                 parseInt(page) - 1
               }&page_size=${page_size}&q=${q}`
             : null,
-      })
-    );
+      };
+
+      redisClient.set(cacheKey, JSON.stringify(responseData), "EX", 3600);
+
+      res.json(responseData);
+    });
   } catch (error) {
     res
       .status(500)
