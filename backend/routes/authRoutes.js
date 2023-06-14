@@ -6,7 +6,6 @@ const authenticateToken = require("../middlewares/authenticateToken");
 
 const userController = require("../controllers/authController");
 const authUserController = require("../controllers/auth/authModular");
-const authUserController = require("../controllers/auth/authModular");
 
 const registerValidation = require("../validators/registerValidation");
 const { loginValidation } = require("../validators/loginValidation");
