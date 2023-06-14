@@ -8,7 +8,6 @@ const connectDB = require("./config/db");
 const nasaRoute = require("./routes/nasaRoutes");
 const cookieParser = require("cookie-parser");
 const favRoutes = require("./routes/favRoutes");
-const redisClient = require("./config/redis");
 
 // Load environment variables
 dotenv.config();
@@ -38,27 +37,6 @@ const startServer = () => {
   });
 };
 
-app.get("/store/:key/:value", (req, res) => {
-  const { key, value } = req.params;
-  redisClient.set(key, value, (err, reply) => {
-    if (err) {
-      res.status(500).send("Error storing data in Redis");
-    } else {
-      res.send(`Stored ${key}:${value}`);
-    }
-  });
-});
-
-app.get("/retrieve/:key", (req, res) => {
-  const { key } = req.params;
-  redisClient.get(key, (err, reply) => {
-    if (err) {
-      res.status(500).send("Error retrieving data from Redis");
-    } else {
-      res.send(`${key}:${reply}`);
-    }
-  });
-});
 
 // Connect to MongoDB and start the server
 (async () => {
