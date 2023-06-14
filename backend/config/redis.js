@@ -6,11 +6,11 @@ const client = createClient({
 });
 
 client.connect().catch((error) => {
-  console.error("Error connecting to Redis:", error);
+  global.PINO_LOGGER.PINO_LOGGER.error("Error connecting to Redis:", error);
 });
 
 client.on("error", (error) => {
-  console.error("Redis error:", error);
+  global.PINO_LOGGER.PINO_LOGGER.error("Redis error:", error);
 });
 
 module.exports = client;

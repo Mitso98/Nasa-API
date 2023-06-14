@@ -1,3 +1,5 @@
+// Be careful logger is exported globally
+require("./config/logger");
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
@@ -6,8 +8,7 @@ const connectDB = require("./config/db");
 const nasaRoute = require("./routes/nasaRoutes");
 const cookieParser = require("cookie-parser");
 const favRoutes = require("./routes/favRoutes");
-const logger = require("./config/logger");
-const redisClient = require('./config/redis');
+const redisClient = require("./config/redis");
 
 // Load environment variables
 dotenv.config();
@@ -21,7 +22,7 @@ app.use(express.json());
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(cookieParser());
 app.use((req, res, next) => {
-  logger.info(`[${req.method}] ${req.url}`);
+  global.PINO_LOGGER.info(`[${req.method}] ${req.url}`);
   next();
 });
 
@@ -37,23 +38,22 @@ const startServer = () => {
   });
 };
 
-
-app.get('/store/:key/:value', (req, res) => {
+app.get("/store/:key/:value", (req, res) => {
   const { key, value } = req.params;
   redisClient.set(key, value, (err, reply) => {
     if (err) {
-      res.status(500).send('Error storing data in Redis');
+      res.status(500).send("Error storing data in Redis");
     } else {
       res.send(`Stored ${key}:${value}`);
     }
   });
 });
 
-app.get('/retrieve/:key', (req, res) => {
+app.get("/retrieve/:key", (req, res) => {
   const { key } = req.params;
   redisClient.get(key, (err, reply) => {
     if (err) {
-      res.status(500).send('Error retrieving data from Redis');
+      res.status(500).send("Error retrieving data from Redis");
     } else {
       res.send(`${key}:${reply}`);
     }
@@ -66,6 +66,6 @@ app.get('/retrieve/:key', (req, res) => {
     await connectDB();
     startServer();
   } catch (error) {
-    console.error("MongoDB connection error:", error);
+    global.PINO_LOGGER.PINO_LOGGER.error("MongoDB connection error:", error);
   }
 })();

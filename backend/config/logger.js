@@ -1,7 +1,7 @@
-const pino = require('pino');
-const prettyPrintStream = require('pino-pretty')();
+const pino = require("pino");
+const prettyPrintStream = require("pino-pretty")();
 
-const level = process.env.LOG_LEVEL || 'info';
+const level = process.env.LOG_LEVEL || "info";
 
 const logger = pino(
   {
@@ -10,4 +10,4 @@ const logger = pino(
   prettyPrintStream
 );
 
-module.exports = logger;
+global.PINO_LOGGER = logger;

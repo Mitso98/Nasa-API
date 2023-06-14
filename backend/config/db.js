@@ -8,7 +8,10 @@ const connectDB = async () => {
     await mongoose.connect(process.env.MONGO_URI);
     console.log("Mongo connected");
   } catch (error) {
-    console.error("error connecting to Mongo: ", error.message);
+    global.PINO_LOGGER.PINO_LOGGER.error(
+      "error connecting to Mongo: ",
+      error.message
+    );
     process.exit(1);
   }
 };
