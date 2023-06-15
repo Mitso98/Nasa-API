@@ -1,10 +1,8 @@
 const User = require("../../models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const dotenv = require("dotenv");
 const { validationResult } = require("express-validator");
 
-dotenv.config();
 const { JWT_SECRET } = process.env;
 
 exports.login = async (req, res) => {

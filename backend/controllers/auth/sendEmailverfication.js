@@ -1,11 +1,9 @@
 const User = require("../../models/User");
-const dotenv = require("dotenv");
 const {
   generateEmailVerificationToken,
   sendEmail,
 } = require("../../services/emailService");
 
-dotenv.config();
 const { PORT } = process.env;
 
 exports.sendEmailverfication = async (req, res) => {

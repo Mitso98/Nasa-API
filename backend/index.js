@@ -1,5 +1,6 @@
+require('dotenv').config();
+
 const express = require("express");
-const dotenv = require("dotenv");
 const cors = require("cors");
 const userRoutes = require("./routes/authRoutes");
 const connectDB = require("./config/db");
@@ -9,7 +10,6 @@ const favRoutes = require("./routes/favRoutes");
 const logger = require("./config/logger");
 
 // Load environment variables
-dotenv.config();
 const { PORT } = process.env || 3001;
 
 // Initialize the app

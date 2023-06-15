@@ -1,7 +1,5 @@
 const { check } = require("express-validator");
-const dotenv = require("dotenv");
 
-dotenv.config();
 const { SMTP_USER } = process.env;
 
 exports.registerValidation = [

@@ -1,13 +1,11 @@
 const User = require("../../models/User");
 const bcrypt = require("bcryptjs");
-const dotenv = require("dotenv");
 const { validationResult } = require("express-validator");
 const {
   generateEmailVerificationToken,
   sendEmail,
 } = require("../../services/emailService");
 
-dotenv.config();
 const { PORT } = process.env;
 
 exports.register = async (req, res) => {

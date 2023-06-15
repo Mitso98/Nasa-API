@@ -1,6 +1,4 @@
-const dotenv = require("dotenv");
 const { rateLimitInfoMap } = require("../middlewares/rateLimiter");
-dotenv.config();
 
 exports.rateLimitInfo = async (req, res) => {
   const email = req.params.email;

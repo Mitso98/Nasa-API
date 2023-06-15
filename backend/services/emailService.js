@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const mailer = require("../config/mailer");
+
 const { JWT_SECRET, SMTP_USER } = process.env;
 
 function generateEmailVerificationToken(email) {

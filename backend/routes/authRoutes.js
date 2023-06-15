@@ -4,7 +4,7 @@ const { check } = require("express-validator");
 const { emailVerificationLimiter } = require("../middlewares/rateLimiter");
 const authenticateToken = require("../middlewares/authenticateToken");
 
-const userController = require("../controllers/authController");
+const userController = require("../controllers/rateLimitInfoController");
 const authUserController = require("../controllers/auth/authModular");
 
 const registerValidation = require("../validators/registerValidation");
