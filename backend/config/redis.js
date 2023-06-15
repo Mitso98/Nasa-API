@@ -5,12 +5,14 @@ const client = createClient({
   port: 6379,
 });
 
-client.connect().catch((error) => {
-  global.PINO_LOGGER.PINO_LOGGER.error("Error connecting to Redis:", error);
-});
-
-client.on("error", (error) => {
-  global.PINO_LOGGER.PINO_LOGGER.error("Redis error:", error);
-});
+client
+  .connect()
+  .then(() => {
+    console.log("Successfully connected to Redis");
+  })
+  .catch((error) => {
+    console.error("Error connecting to Redis:", error);
+    process.exit(1);
+  });
 
 module.exports = client;

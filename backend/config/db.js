@@ -1,17 +1,13 @@
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
 
-dotenv.config();
+const { MONGO_URI } = process.env;
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI);
+    await mongoose.connect(MONGO_URI);
     console.log("Mongo connected");
   } catch (error) {
-    global.PINO_LOGGER.PINO_LOGGER.error(
-      "error connecting to Mongo: ",
-      error.message
-    );
+    console.error("error connecting to Mongo: ", error.message);
     process.exit(1);
   }
 };

@@ -41,7 +41,6 @@ exports.getAllFavorites = async (req, res) => {
       prev,
     });
   } catch (error) {
-    global.PINO_LOGGER.error("Error getting all favorites:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -60,7 +59,6 @@ exports.addFavorite = async (req, res) => {
 
     res.status(200).json({ user });
   } catch (error) {
-    global.PINO_LOGGER.error("Error adding favorite:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -79,7 +77,6 @@ exports.removeFavorite = async (req, res) => {
 
     res.status(200).json({ user });
   } catch (error) {
-    global.PINO_LOGGER.error("Error removing favorite:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 };

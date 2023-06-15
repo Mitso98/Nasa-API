@@ -47,7 +47,6 @@ exports.register = async (req, res) => {
       msg: "User registered successfully , verify your email to be able to login!",
     });
   } catch (error) {
-    global.PINO_LOGGER.PINO_LOGGER.error(error);
     return res.status(500).json({ msg: "Server error" });
   }
 };

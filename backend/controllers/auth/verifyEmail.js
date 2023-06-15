@@ -23,7 +23,6 @@ exports.verifyEmail = async (req, res) => {
       msg: "Email has been successfully verified. You can now log in.",
     });
   } catch (error) {
-    global.PINO_LOGGER.PINO_LOGGER.error(error);
     return res.status(500).json({ msg: "Server error" });
   }
 };

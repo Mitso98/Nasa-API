@@ -10,4 +10,4 @@ const logger = pino(
   prettyPrintStream
 );
 
-global.PINO_LOGGER = logger;
+module.exports = logger;
